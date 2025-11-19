@@ -1,0 +1,38 @@
+# ====================
+# 1. SQL Initialization
+#spring.sql.init.mode=never
+#spring.sql.init.schema-locations=classpath:schema.sql
+#spring.sql.init.data-locations=classpath:data.sql
+# ====================
+
+# ====================
+# 2. Datasource (variables externas)
+# ====================
+spring.datasource.url=jdbc:mysql://trolley.proxy.rlwy.net:32368/railway
+spring.datasource.username=root
+spring.datasource.password=xTaqyzYpOUZdgofEcTebLKfzCDBeDWrY
+
+# ====================
+# 3. JPA Config
+# ====================
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+# ====================
+# 4. JWT Config
+# ====================
+jwt.secret=PcYdS5ZWvrHkf7sTkjy(#dv7#DQnT5)p5EWoKRag_
+jwt.expiration=3600000
+
+# ====================
+# 5. CORS personalizado
+# ====================
+cors.allowed-origins=http://agustin-collueque.vercel.app/
+
+# ====================
+# 6. Resend Email Config
+# ====================
+resend.api.key=re_tiweybBc_FakY3h6fdNFNxdjWj36xEzMv
+resend.from=Formulario <onboarding@resend.dev>
+resend.to=agustincv1997@gmail.com

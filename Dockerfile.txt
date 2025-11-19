@@ -1,0 +1,44 @@
+# Usa una imagen base con Java 17 y Maven
+FROM maven:3.8.5-eclipse-temurin-17 AS build
+
+# Crea el directorio de trabajo
+WORKDIR /app
+
+# Copia archivos y compila la app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Etapa final: imagen liviana para producción
+FROM eclipse-temurin:17-jdk-alpine
+# Etapa de build: Maven + Java 17
+FROM maven:3.8.5-eclipse-temurin-17 AS build
+
+WORKDIR /app
+
+# Copia archivos necesarios para resolver dependencias primero
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
+RUN ./mvnw dependency:go-offline
+
+# Copia el resto del código y compila
+COPY src ./src
+RUN ./mvnw clean package -DskipTests
+
+# Etapa de producción: imagen ligera con Java 17
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+# Copia el JAR ya compilado
+COPY --from=build /app/target/*.jar app.jar
+
+# Expone el puerto que usará Railway
+EXPOSE 8080
+
+# Variables de entorno (pueden venir de Railway)
+ENV JAVA_OPTS=""
+
+# Comando para correr la app
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Agustin Collueque
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://agustin-collueque.vercel.app/")
 @RequestMapping("/proyectos")
 @RequiredArgsConstructor
 public class ProyectoController {

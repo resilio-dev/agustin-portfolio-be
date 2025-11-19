@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://agustin-collueque.vercel.app/")
 @RequestMapping("/trabajos")
 @RequiredArgsConstructor
 public class TrabajoController {
